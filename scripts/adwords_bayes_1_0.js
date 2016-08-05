@@ -14,7 +14,7 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   // Create the winner and loser labels if they don't already exist
   checkForLabels(winnerLabel, '#1B9AAA');
   checkForLabels(loserLabel, '#EF476F');
-  checkForLabels(testingLabel, '#57737A');
+  //checkForLabels(testingLabel, '#57737A');
   
   // Include jStat
   var code = getCode('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
@@ -71,7 +71,7 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
       // Remove the labels to avoid errors and confusion
       ad.removeLabel(winnerLabel);
       ad.removeLabel(loserLabel);
-      ad.removeLabel(testingLabel);
+      //ad.removeLabel(testingLabel);
       
       // Set the object values for this ad
       adsObject[i] = {
@@ -130,26 +130,26 @@ function bayesAdTester(adsObject){
       checkForLabels(bestAdLabelName, '#06D6A0');
       var adForLabel = adGroup.ads().withIds([adsObject[0].id]).get().next();
       adForLabel.applyLabel(bestAdLabelName);
-      adForLabel.applyLabel(testingLabel);
+      //adForLabel.applyLabel(testingLabel);
       
       var worstAdLabelName = Math.round((test) * 100) + '% Probability';
       checkForLabels(worstAdLabelName, '#FFC43D');
       var adForLabel = adGroup.ads().withIds([adsObject[1].id]).get().next();
       adForLabel.applyLabel(worstAdLabelName);
-      adForLabel.applyLabel(testingLabel);
+      //adForLabel.applyLabel(testingLabel);
       
     } else {
       var bestAdLabelName = Math.round((1-test) * 100) + '% Probability';
       checkForLabels(bestAdLabelName, '#06D6A0');
       var adForLabel = adGroup.ads().withIds([adsObject[1].id]).get().next();
       adForLabel.applyLabel(bestAdLabelName);
-      adForLabel.applyLabel(testingLabel);
+      //adForLabel.applyLabel(testingLabel);
       
       var worstAdLabelName = Math.round((test) * 100) + '% Probability';
       checkForLabels(worstAdLabelName, '#FFC43D');
       var adForLabel = adGroup.ads().withIds([adsObject[0].id]).get().next();
       adForLabel.applyLabel(worstAdLabelName);
-      adForLabel.applyLabel(testingLabel);
+      //adForLabel.applyLabel(testingLabel);
     }
   }
 }
