@@ -1,4 +1,9 @@
 /*
+ * Global Variables
+ */
+var recipientEmail = 'jfaircloth@cocg.co';
+
+/*
  * A/B Ad Testing
  */
 var adTesting = 1;
@@ -20,9 +25,10 @@ var adTesting = 1;
   var winnerLabel = 'Winner';
   var loserLabel = 'Loser';
 
-
+// Private Variables
 var sendEmail = false;
 var emailBody = '';
+var accountName = AdWordsApp.currentAccount().getName();
 
 function main(){
   if (adTesting == 1) {
@@ -33,8 +39,8 @@ function main(){
     
     if (sendEmail == true) {
       MailApp.sendEmail({
-        to: 'jfaircloth@cocg.co',
-        subject: 'Test',
+        to: 'recipientEmail,
+        subject: 'Ad A/B Test Completed In ' + accountName,
         htmlBody: emailBody
       });
     }

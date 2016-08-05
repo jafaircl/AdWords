@@ -6,7 +6,7 @@
  * @param {string} excludedCampaigns - Text in name of campaigns to skip e.g. 'Display'
  */
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
-  emailBody = '<h2>Ad A/B Test Completed In:</h2><ul>';
+  emailBody += '<h2>Ad A/B Test Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
