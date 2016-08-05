@@ -119,16 +119,22 @@ function bayesAdTester(adsObject){
   var decision = bayesDecision(alphaA, betaA, alphaB, betaB);
   
   if ( decision < 0.002 ) {
+    decision = 1 - decision;
+    decision = (decision * 100).toFixed(5);
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
-      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
+      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += 'There is a ' + decision + '% chance this is the right choice.'
+      emailBody += '</li>';
       sendEmail = true;
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
-      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
+      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += 'There is a ' + decision + '% chance this is the right choice.'
+      emailBody += '</li>';
       sendEmail = true;
       
     }

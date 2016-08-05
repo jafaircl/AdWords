@@ -30,6 +30,9 @@ var sendEmail = false;
 var emailBody = '';
 var accountName = AdWordsApp.currentAccount().getName();
 
+/*
+ * Main Function
+ */
 function main(){
   if (adTesting == 1) {
     // Include the script
