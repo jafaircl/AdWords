@@ -132,14 +132,14 @@ function bayesAdTester(adsObject){
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
-      sendEmail == true;
+      sendEmail = true;
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
       Logger.log(sendEmail + ' - ' + emailBody);
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
-      sendEmail == true;
+      sendEmail = true;
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
       Logger.log(sendEmail + ' - ' + emailBody);
       
