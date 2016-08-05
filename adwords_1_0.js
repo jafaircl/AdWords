@@ -1,6 +1,7 @@
 /*
  * Global Variables
  */
+// Email address to send reports
 var recipientEmail = 'jfaircloth@cocg.co';
 
 /*
@@ -39,14 +40,15 @@ function main(){
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     eval(code);
     bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
-    
-    if (sendEmail == true) {
-      MailApp.sendEmail({
-        to: recipientEmail,
-        subject: 'Ad A/B Test Completed In ' + accountName,
-        htmlBody: emailBody
-      });
-    }
+  }
+  
+  // Send an email alert if anything triggered it.
+  if (sendEmail == true) {
+    MailApp.sendEmail({
+      to: recipientEmail,
+      subject: 'Daily Alerts For ' + accountName,
+      htmlBody: emailBody
+    });
   }
 }
 

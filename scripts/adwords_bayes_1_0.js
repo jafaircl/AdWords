@@ -1,3 +1,4 @@
+var bayesSendEmail = 0;
 /*
  * Bayesian Ad Testing Function
  * ---
@@ -6,7 +7,6 @@
  * @param {string} excludedCampaigns - Text in name of campaigns to skip e.g. 'Display'
  */
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
-  emailBody += '<h2>Ad A/B Test Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
@@ -121,10 +121,16 @@ function bayesAdTester(adsObject){
   if ( decision < 0.002 ) {
     decision = 100 * (1 - decision).toFixed(6);
     
+    bayesSendEmail++;
+    
+    if ( bayesSendEmail == 1 ) {
+      emailBody += '<h2>A/B Testing Results:</h2><ul>';
+    }
+    
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
-      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a ' + decision + '% chance this is the right choice.'
       emailBody += '<br></li>';
       sendEmail = true;
@@ -132,8 +138,8 @@ function bayesAdTester(adsObject){
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
-      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
-      emailBody += 'There is a ' + decision + '% chance this is the right choice.'
+      emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += 'This is almost surely the right choice. There is a ' + decision + '% chance.'
       emailBody += '<br></li>';
       sendEmail = true;
       
@@ -148,6 +154,12 @@ function bayesAdTester(adsObject){
       checkForLabels(worstAdLabelName, '#FFC43D');
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(worstAdLabelName);
       
+      if ( test < 0.05 ) {
+        emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+        emailBody += 'There is a ' + Math.round((1-test) * 100) + '% chance probability one ad is better than the other.';
+        emailBody += '<br></li>';
+      }
+      
     } else {
       var bestAdLabelName = Math.round((1-test) * 100) + '% Probability';
       checkForLabels(bestAdLabelName, '#06D6A0');
@@ -156,6 +168,12 @@ function bayesAdTester(adsObject){
       var worstAdLabelName = Math.round((test) * 100) + '% Probability';
       checkForLabels(worstAdLabelName, '#FFC43D');
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(worstAdLabelName);
+      
+      if ( test > 0.95 ) {
+        emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+        emailBody += 'There is a ' + Math.round(test * 100) + '% chance probability one ad is better than the other.';
+        emailBody += '<br></li>';
+      }
     }
   }
 }
