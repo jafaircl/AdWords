@@ -41,6 +41,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   
   emailBody += '</ul>';
   
+  Logger.log(emailBody);
+  Logger.log(sendEmail);
   if (sendEmail == true) {
     return emailBody;
     MailApp.sendEmail({
