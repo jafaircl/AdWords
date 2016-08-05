@@ -1,4 +1,4 @@
-function main() {
+function test() {
   Logger.log('hey buddy');
 }
 /*
