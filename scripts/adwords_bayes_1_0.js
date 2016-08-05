@@ -131,18 +131,18 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
       
-      emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
-      emailBody += '<br></li>';
+      emailBody += '</strong><br></li>';
       sendEmail = true;
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
       
-      emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
+      emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
-      emailBody += '<br></li>';
+      emailBody += '</strong><br></li>';
       sendEmail = true;
       
     }
