@@ -25,7 +25,7 @@ var adTesting = 1;
 function main(){
   if (adTesting == 1) {
     // Include the script
-    includeExternalJS('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
+    includeExternalJS('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
   }
 }
