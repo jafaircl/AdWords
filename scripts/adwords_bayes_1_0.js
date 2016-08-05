@@ -8,7 +8,7 @@
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
   // set to false initially
   var sendEmail = false;
-  emailBody += '<h2>Ad A/B Tests Completed In:</h2><ul>';
+  var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
@@ -97,7 +97,7 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
     }
     
     // Test the ads
-    bayesAdTester(adsObject);
+    bayesAdTester(adsObject, emailBody);
   }
 }
 
@@ -106,7 +106,7 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
  * ---
  * @param {object} adsObject - The object containing the ad information
  */
-function bayesAdTester(adsObject){
+function bayesAdTester(adsObject, emailBody){
   if ( adsObject[0].conversions >= conversionThreshold 
       && adsObject[1].conversions >= conversionThreshold ) {
     var adGroup = adsObject[0].adGroup;
