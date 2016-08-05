@@ -22,6 +22,9 @@ var adTesting = 1;
   // rate as the test. Set to a very high number to always use clicks
   var conversionThreshold = 2;
 
+  // @param {number} Threshold of caring. Any loss below this number is acceptable.
+  var acceptableLoss = 0.002;
+
   // @params {string} Label Names
   var winnerLabel = 'Winner';
   var loserLabel = 'Loser';

@@ -117,7 +117,7 @@ function bayesAdTester(adsObject){
   
   // Run the decision function
   var decision = bayesDecision(alphaA, betaA, alphaB, betaB);
-  var formattedDecision = 100 * (1 - decision).toFixed(6);
+  var formattedDecision = (100 * decision).toFixed(6);
   
   if ( decision < 0.002 ) {
     
@@ -130,16 +130,18 @@ function bayesAdTester(adsObject){
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
+      
       emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
-      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is ' + formattedDecision + '%.'
+      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
       emailBody += '<br></li>';
       sendEmail = true;
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
+      
       emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
-      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is ' + formattedDecision + '%.'
+      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
       emailBody += '<br></li>';
       sendEmail = true;
       
