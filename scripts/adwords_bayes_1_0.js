@@ -126,7 +126,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a ' + decision + '% chance this is the right choice.'
-      emailBody += '</li>';
+      emailBody += '<br></li>';
       sendEmail = true;
       
     } else {
@@ -134,7 +134,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a ' + decision + '% chance this is the right choice.'
-      emailBody += '</li>';
+      emailBody += '<br></li>';
       sendEmail = true;
       
     }
