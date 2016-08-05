@@ -119,8 +119,8 @@ function bayesAdTester(adsObject){
   var decision = bayesDecision(alphaA, betaA, alphaB, betaB);
   
   if ( decision < 0.002 ) {
-    decision = 1 - decision;
-    decision = (decision * 100).toFixed(5);
+    decision = 100 * (1 - decision).toFixed(6);
+    
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
