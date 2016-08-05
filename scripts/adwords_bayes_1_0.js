@@ -1,6 +1,3 @@
-function test() {
-  Logger.log('hey buddy');
-}
 /*
  * Bayesian Ad Testing Function
  * ---
