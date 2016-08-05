@@ -1,4 +1,5 @@
-/*
+
+var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';/*
  * Bayesian Ad Testing Function
  * ---
  * @param {string} impressionThreshold - Minimum impressions or skip ad group e.g. 'Impressions > 50'
@@ -8,7 +9,6 @@
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
   // set to false initially
   var sendEmail = false;
-  var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
@@ -37,12 +37,14 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
     var adGroupConversions = adGroup.getStatsFor(timePeriod).getConvertedClicks();
     
     Logger.log(adGroupName);
-    bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod, emailBody);
-    bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod, emailBody);
+    bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod);
+    bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod);
   }
   
   emailBody += '</ul>';
+  
   if (sendEmail == true) {
+    return emailBody;
     MailApp.sendEmail({
       to: 'jfaircloth@cocg.co',
       subject: 'Test',
@@ -56,7 +58,7 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
  * ---
  * @param {string} device - Iterate through the ads and do the tests
  */
-function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod, emailBody) {
+function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
   
   var adIterator = adGroup.ads()
       .withCondition('Status = ENABLED')
@@ -132,16 +134,16 @@ function bayesAdTester(adsObject, emailBody){
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
-      sendEmail = true;
+      sendEmail == true;
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
-      Logger.log(emailBody);
+      Logger.log(sendEmail + ' - ' + emailBody);
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
-      sendEmail = true;
+      sendEmail == true;
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
-      Logger.log(emailBody);
+      Logger.log(sendEmail + ' - ' + emailBody);
       
     }
   } else {
