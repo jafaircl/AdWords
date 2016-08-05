@@ -157,7 +157,7 @@ function bayesAdTester(adsObject){
       if ( test < 0.05 ) {
         emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
         emailBody += 'There is a ' + Math.round((1-test) * 100) + '% probability one ad is better than the other.<br>';
-        emailBody += 'If it is wrong, the expeced loss is ' + formattedDecision + '%.';
+        emailBody += 'If it is wrong, the potential loss is ' + formattedDecision + '%.';
         emailBody += '<br></li>';
       }
       
@@ -173,7 +173,7 @@ function bayesAdTester(adsObject){
       if ( test > 0.95 ) {
         emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
         emailBody += 'There is a ' + Math.round(test * 100) + '% probability one ad is better than the other.<br>';
-        emailBody += 'If it is wrong, the expeced loss is ' + formattedDecision + '%.';
+        emailBody += 'If it is wrong, the potential loss is ' + formattedDecision + '%.';
         emailBody += '<br></li>';
       }
     }
