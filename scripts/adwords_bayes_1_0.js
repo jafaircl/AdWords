@@ -37,8 +37,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
     var adGroupConversions = adGroup.getStatsFor(timePeriod).getConvertedClicks();
     
     Logger.log(adGroupName);
-    bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod);
-    bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod);
+    bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod, emailBody);
+    bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod, emailBody);
   }
   
   emailBody += '</ul>';
@@ -56,7 +56,7 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
  * ---
  * @param {string} device - Iterate through the ads and do the tests
  */
-function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
+function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod, emailBody) {
   
   var adIterator = adGroup.ads()
       .withCondition('Status = ENABLED')
