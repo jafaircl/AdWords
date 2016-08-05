@@ -1,6 +1,5 @@
 function main() {
-  
-  bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
+  Logger.log('hey buddy');
 }
 /*
  * Bayesian Ad Testing Function
