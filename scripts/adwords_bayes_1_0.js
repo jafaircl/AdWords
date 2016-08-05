@@ -34,15 +34,11 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
     var adGroupId = adGroup.getId();
     var adGroupConversions = adGroup.getStatsFor(timePeriod).getConvertedClicks();
     
-    Logger.log(adGroupName);
     bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod);
     bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod);
   }
   
   emailBody += '</ul>';
-  
-  Logger.log(emailBody);
-  Logger.log(sendEmail);
 }
 
 /*
@@ -128,14 +124,12 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
       sendEmail = true;
-      Logger.log(emailBody);
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
       sendEmail = true;
-      Logger.log(emailBody);
       
     }
   } else {

@@ -39,7 +39,7 @@ function main(){
     
     if (sendEmail == true) {
       MailApp.sendEmail({
-        to: 'recipientEmail,
+        to: recipientEmail,
         subject: 'Ad A/B Test Completed In ' + accountName,
         htmlBody: emailBody
       });
