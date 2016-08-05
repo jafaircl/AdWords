@@ -1,3 +1,7 @@
+function main() {
+  
+  bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
+}
 /*
  * Bayesian Ad Testing Function
  * ---
