@@ -1,5 +1,3 @@
-var sendEmail = false;
-var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
 /*
  * Bayesian Ad Testing Function
  * ---
@@ -8,6 +6,7 @@ var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
  * @param {string} excludedCampaigns - Text in name of campaigns to skip e.g. 'Display'
  */
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
+  emailBody = '<h2>Ad A/B Test Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
@@ -44,13 +43,6 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   
   Logger.log(emailBody);
   Logger.log(sendEmail);
-  if (sendEmail == true) {
-    MailApp.sendEmail({
-      to: 'jafaircl@me.com',
-      subject: 'Test',
-      htmlBody: emailBody
-    });
-  }
 }
 
 /*

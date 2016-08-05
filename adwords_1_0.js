@@ -20,12 +20,24 @@ var adTesting = 1;
   var winnerLabel = 'Winner';
   var loserLabel = 'Loser';
 
+
+var sendEmail = false;
+var emailBody = '';
+
 function main(){
   if (adTesting == 1) {
     // Include the script
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     eval(code);
     bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
+    
+    if (sendEmail == true) {
+      MailApp.sendEmail({
+        to: 'jfaircloth@cocg.co',
+        subject: 'Test',
+        htmlBody: emailBody
+      });
+    }
   }
 }
 
