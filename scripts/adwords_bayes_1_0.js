@@ -6,6 +6,9 @@
  * @param {string} excludedCampaigns - Text in name of campaigns to skip e.g. 'Display'
  */
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
+  // set to false initially
+  var sendEmail = false;
+  var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
@@ -14,7 +17,6 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   // Create the winner and loser labels if they don't already exist
   checkForLabels(winnerLabel, '#1B9AAA');
   checkForLabels(loserLabel, '#EF476F');
-  //checkForLabels(testingLabel, '#57737A');
   
   // Include jStat
   var code = getCode('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
@@ -37,6 +39,15 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
     Logger.log(adGroupName);
     bayesAdIterator('ALL', adGroup, impressionThreshold, timePeriod);
     bayesAdIterator('MOBILE', adGroup, impressionThreshold, timePeriod);
+  }
+  
+  emailBody += '</ul>';
+  if (sendEmail == true) {
+    MailApp.sendEmail({
+      to: 'jfaircloth@cocg.co',
+      subject: 'Test',
+      htmlBody: emailBody
+    });
   }
 }
 
@@ -71,12 +82,13 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
       // Remove the labels to avoid errors and confusion
       ad.removeLabel(winnerLabel);
       ad.removeLabel(loserLabel);
-      //ad.removeLabel(testingLabel);
       
       // Set the object values for this ad
       adsObject[i] = {
-        adGroup: adGroup,
         id: ad.getId(),
+        adGroup: adGroup,
+        adGroupName: adGroup.getName(),
+        campaignName: adGroup.getCampaign().getName(),
         clicks: adStats.getClicks(),
         impressions: adStats.getImpressions(),
         conversions: adStats.getConvertedClicks()
@@ -120,36 +132,33 @@ function bayesAdTester(adsObject){
     if ( test < 0.5 ) {
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
+      sendEmail = true;
+      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
+      
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
+      sendEmail = true;
+      emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
     }
   } else {
     if ( test < 0.5 ) {
       var bestAdLabelName = Math.round((1-test) * 100) + '% Probability';
       checkForLabels(bestAdLabelName, '#06D6A0');
-      var adForLabel = adGroup.ads().withIds([adsObject[0].id]).get().next();
-      adForLabel.applyLabel(bestAdLabelName);
-      //adForLabel.applyLabel(testingLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(bestAdLabelName);
       
       var worstAdLabelName = Math.round((test) * 100) + '% Probability';
       checkForLabels(worstAdLabelName, '#FFC43D');
-      var adForLabel = adGroup.ads().withIds([adsObject[1].id]).get().next();
-      adForLabel.applyLabel(worstAdLabelName);
-      //adForLabel.applyLabel(testingLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(worstAdLabelName);
       
     } else {
       var bestAdLabelName = Math.round((1-test) * 100) + '% Probability';
       checkForLabels(bestAdLabelName, '#06D6A0');
-      var adForLabel = adGroup.ads().withIds([adsObject[1].id]).get().next();
-      adForLabel.applyLabel(bestAdLabelName);
-      //adForLabel.applyLabel(testingLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(bestAdLabelName);
       
       var worstAdLabelName = Math.round((test) * 100) + '% Probability';
       checkForLabels(worstAdLabelName, '#FFC43D');
-      var adForLabel = adGroup.ads().withIds([adsObject[0].id]).get().next();
-      adForLabel.applyLabel(worstAdLabelName);
-      //adForLabel.applyLabel(testingLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(worstAdLabelName);
     }
   }
 }
