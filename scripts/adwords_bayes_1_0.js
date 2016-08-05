@@ -133,11 +133,15 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
+      sendEmail = true;
+      Logger.log(emailBody);
       
     } else {
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
       emailBody += '<li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '</li>';
+      sendEmail = true;
+      Logger.log(emailBody);
       
     }
   } else {
