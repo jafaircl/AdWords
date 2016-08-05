@@ -17,7 +17,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   checkForLabels(testingLabel, '#57737A');
   
   // Include jStat
-  includeExternalJS('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
+  var code = getCode('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
+  eval(code);
   
   var adGroupIterator = AdWordsApp.adGroups()
       .withCondition('CampaignStatus = ENABLED')

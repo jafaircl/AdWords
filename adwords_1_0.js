@@ -1,4 +1,3 @@
-
 /*
  * A/B Ad Testing
  */
@@ -25,18 +24,20 @@ var adTesting = 1;
 function main(){
   if (adTesting == 1) {
     // Include the script
-    includeExternalJS('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
+    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
+    eval(code);
     bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
   }
 }
 
 /*
- * Include External JavaScript Libraries
+ * Run External JavaScript
  * ---
  * @param {string} url - The URL of the external JavaScript file.
  */
-function includeExternalJS(url){
-  eval(UrlFetchApp.fetch(url).getContentText());
+function getCode(url){
+  var stuff = UrlFetchApp.fetch(url).getContentText();
+  return stuff;
 }
 
 /*
