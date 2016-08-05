@@ -19,7 +19,6 @@ var adTesting = 1;
   // @params {string} Label Names
   var winnerLabel = 'Winner';
   var loserLabel = 'Loser';
-  var testingLabel = 'Test In Progress';
 
 function main(){
   if (adTesting == 1) {
