@@ -20,6 +20,7 @@ var adTesting = 1;
   var winnerLabel = 'Winner';
   var loserLabel = 'Loser';
 
+var emailBody = '';
 function main(){
   if (adTesting == 1) {
     // Include the script

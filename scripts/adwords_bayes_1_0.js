@@ -1,4 +1,3 @@
-var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
 /*
  * Bayesian Ad Testing Function
  * ---
@@ -9,6 +8,7 @@ var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
 function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns) {
   // set to false initially
   var sendEmail = false;
+  emailBody += '<h2>Ad A/B Tests Completed In:</h2><ul>';
   
   // Remove the percentage labels
   deleteLabels('Probability');
