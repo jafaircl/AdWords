@@ -1,5 +1,6 @@
 var sendEmail = false;
-var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';/*
+var emailBody = '<h2>Ad A/B Tests Completed In:</h2><ul>';
+/*
  * Bayesian Ad Testing Function
  * ---
  * @param {string} impressionThreshold - Minimum impressions or skip ad group e.g. 'Impressions > 50'
@@ -44,9 +45,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   Logger.log(emailBody);
   Logger.log(sendEmail);
   if (sendEmail == true) {
-    return emailBody;
     MailApp.sendEmail({
-      to: 'jfaircloth@cocg.co',
+      to: 'jafaircl@me.com',
       subject: 'Test',
       htmlBody: emailBody
     });
