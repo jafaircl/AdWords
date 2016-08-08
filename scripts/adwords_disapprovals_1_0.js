@@ -1,3 +1,5 @@
+var brokenUrlLabelName = 'Broken URL';
+
 function checkKeywords(){
   var keywordIterator = AdWordsApp.keywords()
       .withCondition('CampaignStatus = ENABLED')
@@ -27,7 +29,7 @@ function checkKeywords(){
       }
       i++;
       sendEmail = true;
-      emailBody += '<li>' + keywordText + ' in ' + campaignName + '</li>';
+      emailBody += '<li>' + keywordText + ' in ' + campaignName +  ' (' + keyword.getDisapprovalReasons() + ')</li>';
     }
     
     // Check for keywords below first page CPC
