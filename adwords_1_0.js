@@ -25,10 +25,6 @@ var adTesting = 1;
   // @param {number} Threshold of caring. Any loss below this number is acceptable.
   var abAcceptableLoss = 0.002;
 
-  // @params {string} Label Names
-  var abWinnerLabel = 'Winner';
-  var abLoserLabel = 'Loser';
-
 // Private Variables
 var sendEmail = false;
 var emailBody = '';
