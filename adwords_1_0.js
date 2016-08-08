@@ -5,6 +5,17 @@
 var recipientEmail = 'jfaircloth@cocg.co';
 
 /*
+ * Ad Extension Check
+ */
+var adExtensionCheck = 1;
+
+  // @param {string} extImpressionThreshold - Minimum impressions needed to confirm an extension is on
+  var extImpressionThreshold = 'Impressions = 0';
+
+  // @param {string} extDateRange - Date range to use for checking impressions
+  var extDateRange = 'YESTERDAY';
+
+/*
  * A/B Ad Testing
  */
 var adTesting = 1;
@@ -34,8 +45,14 @@ var accountName = AdWordsApp.currentAccount().getName();
  * Main Function
  */
 function main(){
+  
+  if (adExtensionCheck == 1){
+    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_extensions_1_0.js');
+    eval(code);
+    checkAdExtensions();
+  }
+  
   if (adTesting == 1) {
-    // Include the script
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     eval(code);
     bayesAdGroupIterator(abImpressionThreshold, abTimePeriod, abExcludedCampaigns);
