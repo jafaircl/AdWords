@@ -1,3 +1,9 @@
+// @param {string} extImpressionThreshold - Minimum impressions needed to confirm an extension is on
+var extImpressionThreshold = 'Impressions = 0';
+
+// @param {string} extDateRange - Date range to use for checking impressions
+var extDateRange = 'YESTERDAY';
+
 /*
  * Ad Extension Checker
  * ---
@@ -33,7 +39,7 @@ function checkAdExtensions() {
   
   if (calloutIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h2>Callout Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
+    emailBody += '<h2>Callout Extensions with 0 Impressions Yesterday:</h2><ul>';
   }
   while (calloutIterator.hasNext()) {
     var callout = calloutIterator.next().getText();
@@ -46,7 +52,7 @@ function checkAdExtensions() {
   
   if (phoneNumberIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h2>Call Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
+    emailBody += '<h2>Call Extensions with 0 Impressions Yesterday:</h2><ul>';
   }
   while (phoneNumberIterator.hasNext()) {
     var phoneNumber = phoneNumberIterator.next().getPhoneNumber();
@@ -59,7 +65,7 @@ function checkAdExtensions() {
   
   if (reviewIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h2>Review Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
+    emailBody += '<h2>Review Extensions with 0 Impressions Yesterday:</h2><ul>';
   }
   while (reviewIterator.hasNext()) {
     var review = reviewIterator.next().getText();
@@ -72,7 +78,7 @@ function checkAdExtensions() {
   
   if (sitelinkIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h2>Sitelink Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
+    emailBody += '<h2>Sitelink Extensions with 0 Impressions Yesterday:</h2><ul>';
   }
   while (sitelinkIterator.hasNext()) {
     var sitelink = sitelinkIterator.next().getLinkText();

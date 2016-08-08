@@ -35,12 +35,14 @@ function checkKeywords(){
     // Check for keywords below first page CPC
     if (keywordFirstPageCpc > keywordCpc ) {
       if (j == 0) {
-        emailBody += '<h3>Keywords Below First Page Bid:</h3>';
+        emailBody += '<table><tr><th colspan="4"><h3>Keywords Below First Page Bid:</h3></th></tr>';
+        emailBody += '<tr><th>Campaign</th><th>Keyword</th><th>Current Bid</th><th>First Page Bid</th></tr>';
       }
       j++;
       sendEmail = true;
-      emailBody += '<li>' + keywordText + ' in ' + campaignName + ' - Current: $' + keywordCpc + ' - First Page: $' + keywordFirstPageCpc + '</li>';
+      emailBody += '<tr><td>' + campaignName + '</td><td>' + keywordText + '</td><td>$' + keywordCpc + '</td><td>$' + keywordFirstPageCpc + '</td></tr>';
     }
+    emailBody += '</table>';
   }
 }
 

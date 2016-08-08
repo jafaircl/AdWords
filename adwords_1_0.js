@@ -9,21 +9,15 @@ var recipientEmail = 'jfaircloth@cocg.co';
  */
 var adExtensionCheck = 1;
 
-  // @param {string} extImpressionThreshold - Minimum impressions needed to confirm an extension is on
-  var extImpressionThreshold = 'Impressions = 0';
-
-  // @param {string} extDateRange - Date range to use for checking impressions
-  var extDateRange = 'YESTERDAY';
-
 /*
  * Check For And & Keyword Disapprovals
  */
-var disapprovalsCheck = 1;
+var checkAdsAndKeywords = 1;
 
 /*
  * A/B Ad Testing
  */
-var adTesting = 0;
+var adTesting = 1;
 
   // @param {string} Minimum impressions or skip ad group e.g. 'Impressions > 50'
   var abImpressionThreshold = 'Impressions > 100';
@@ -62,7 +56,7 @@ function main(){
     checkAdExtensions();
   }
   
-  if (disapprovalsCheck == 1){
+  if (checkAdsAndKeywords == 1){
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_disapprovals_1_0.js');
     eval(code);
     checkKeywords();
@@ -80,8 +74,6 @@ function main(){
     eval(code);
     watsonKeywords();
   }
-  
-  watsonKeywords();
   
   // Send an email alert if anything triggered it.
   if (sendEmail == true) {
