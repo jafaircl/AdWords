@@ -16,6 +16,11 @@ var adExtensionCheck = 1;
   var extDateRange = 'YESTERDAY';
 
 /*
+ * Check For And & Keyword Disapprovals
+ */
+var disapprovalsCheck = 1;
+
+/*
  * A/B Ad Testing
  */
 var adTesting = 0;
@@ -36,6 +41,11 @@ var adTesting = 0;
   // @param {number} Threshold of caring. Any loss below this number is acceptable.
   var abAcceptableLoss = 0.002;
 
+/*
+ * Watson Keyword Miner
+ */
+var watsonKeywordMiner = 1;
+
 // Private Variables
 var sendEmail = false;
 var emailBody = '';
@@ -52,11 +62,26 @@ function main(){
     checkAdExtensions();
   }
   
+  if (disapprovalsCheck == 1){
+    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_disapprovals_1_0.js');
+    eval(code);
+    checkKeywords();
+    checkAds();
+  }
+  
   if (adTesting == 1) {
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     eval(code);
     bayesAdGroupIterator(abImpressionThreshold, abTimePeriod, abExcludedCampaigns);
   }
+  
+  if (watsonKeywordMiner == 1) {
+    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_watson_1_0.js');
+    eval(code);
+    watsonKeywords();
+  }
+  
+  watsonKeywords();
   
   // Send an email alert if anything triggered it.
   if (sendEmail == true) {
@@ -109,3 +134,7 @@ function checkForLabels(labelName, labelColor) {
     AdWordsApp.createLabel(labelName, '', labelColor);
   }
 }
+
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
