@@ -18,7 +18,7 @@ var adExtensionCheck = 1;
 /*
  * A/B Ad Testing
  */
-var adTesting = 1;
+var adTesting = 0;
 
   // @param {string} Minimum impressions or skip ad group e.g. 'Impressions > 50'
   var abImpressionThreshold = 'Impressions > 100';

@@ -52,7 +52,7 @@ function checkAdExtensions() {
     var phoneNumber = phoneNumberIterator.next().getPhoneNumber();
     emailBody += '<li>' + phoneNumber + '</li>';
     
-    if (!calloutIterator.hasNext()){
+    if (!phoneNumberIterator.hasNext()){
       emailBody += '</ul>';
     }
   }
@@ -65,7 +65,7 @@ function checkAdExtensions() {
     var review = reviewIterator.next().getText();
     emailBody += '<li>' + review + '</li>';
     
-    if (!calloutIterator.hasNext()){
+    if (!reviewIterator.hasNext()){
       emailBody += '</ul>';
     }
   }
@@ -78,7 +78,7 @@ function checkAdExtensions() {
     var sitelink = sitelinkIterator.next().getLinkText();
     emailBody += '<li>' + sitelink + '</li>';
     
-    if (!calloutIterator.hasNext()){
+    if (!sitelinkIterator.hasNext()){
       emailBody += '</ul>';
     }
   }
