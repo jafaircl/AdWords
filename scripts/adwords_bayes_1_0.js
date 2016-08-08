@@ -70,8 +70,8 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
       var adStats = ad.getStatsFor(timePeriod);
       
       // Remove the labels to avoid errors and confusion
-      ad.removeLabel(winnerLabel);
-      ad.removeLabel(loserLabel);
+      ad.removeLabel(abWinnerLabel);
+      ad.removeLabel(abLoserLabel);
       
       // Set the object values for this ad
       adsObject[i] = {
@@ -128,8 +128,8 @@ function bayesAdTester(adsObject){
     }
     
     if ( test < 0.5 ) {
-      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
-      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(abWinnerLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(abLoserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expected loss is only ' + formattedDecision + '%.'
@@ -137,8 +137,8 @@ function bayesAdTester(adsObject){
       sendEmail = true;
       
     } else {
-      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
-      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(abWinnerLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(abLoserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
