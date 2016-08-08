@@ -33,37 +33,53 @@ function checkAdExtensions() {
   
   if (calloutIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h3>Callout Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h3>';
+    emailBody += '<h2>Callout Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
   }
   while (calloutIterator.hasNext()) {
     var callout = calloutIterator.next().getText();
     emailBody += '<li>' + callout + '</li>';
+    
+    if (!calloutIterator.hasNext()){
+      emailBody += '</ul>';
+    }
   }
   
   if (phoneNumberIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h3>Call Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h3>';
+    emailBody += '<h2>Call Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
   }
   while (phoneNumberIterator.hasNext()) {
     var phoneNumber = phoneNumberIterator.next().getPhoneNumber();
     emailBody += '<li>' + phoneNumber + '</li>';
+    
+    if (!calloutIterator.hasNext()){
+      emailBody += '</ul>';
+    }
   }
   
   if (reviewIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h3>Review Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h3>';
+    emailBody += '<h2>Review Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
   }
   while (reviewIterator.hasNext()) {
     var review = reviewIterator.next().getText();
     emailBody += '<li>' + review + '</li>';
+    
+    if (!calloutIterator.hasNext()){
+      emailBody += '</ul>';
+    }
   }
   
   if (sitelinkIterator.hasNext()){
     sendEmail = true;
-    emailBody += '<h3>Sitelink Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h3>';
+    emailBody += '<h2>Sitelink Extensions with ' + extImpressionThreshold + ' from ' + extDateRange + ':</h2><ul>';
   }
   while (sitelinkIterator.hasNext()) {
     var sitelink = sitelinkIterator.next().getLinkText();
     emailBody += '<li>' + sitelink + '</li>';
+    
+    if (!calloutIterator.hasNext()){
+      emailBody += '</ul>';
+    }
   }
 }

@@ -122,8 +122,8 @@ function bayesAdTester(adsObject){
   var formattedDecision = (100 * decision).toFixed(6);
   
   if ( decision < 0.002 ) {
-    
     bayesSendEmail++;
+    
     
     if ( bayesSendEmail == 1 ) {
       emailBody += '<h2>A/B Testing Results:</h2><ul>';
@@ -159,6 +159,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(worstAdLabelName);
       
       if ( test < 0.05 ) {
+        bayesSendEmail++;
         emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
         emailBody += 'There is a ' + Math.round((1-test) * 100) + '% probability one ad is better than the other.<br>';
         emailBody += 'If it is wrong, the potential loss is ' + formattedDecision + '%.';
@@ -175,6 +176,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(worstAdLabelName);
       
       if ( test > 0.95 ) {
+        bayesSendEmail++;
         emailBody += '<br><li>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
         emailBody += 'There is a ' + Math.round(test * 100) + '% probability one ad is better than the other.<br>';
         emailBody += 'If it is wrong, the potential loss is ' + formattedDecision + '%.';
