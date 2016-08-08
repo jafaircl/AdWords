@@ -1,4 +1,6 @@
 var bayesSendEmail = 0;
+var abWinnerLabel = 'Winner';
+var abLoserLabel = 'Loser';
 /*
  * Bayesian Ad Testing Function
  * ---
@@ -13,8 +15,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   deleteLabels('Odds To Win');
   
   // Create the winner and loser labels if they don't already exist
-  checkForLabels('Winner', '#1B9AAA');
-  checkForLabels('Loser', '#EF476F');
+  checkForLabels(abWinnerLabel, '#1B9AAA');
+  checkForLabels(abLoserLabel, '#EF476F');
   
   // Include jStat
   var code = getCode('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
@@ -128,8 +130,8 @@ function bayesAdTester(adsObject){
     }
     
     if ( test < 0.5 ) {
-      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(winnerLabel);
-      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(abWinnerLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(abLoserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expected loss is only ' + formattedDecision + '%.'
@@ -137,8 +139,8 @@ function bayesAdTester(adsObject){
       sendEmail = true;
       
     } else {
-      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(winnerLabel);
-      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(loserLabel);
+      adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(abWinnerLabel);
+      adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(abLoserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
       emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
