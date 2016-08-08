@@ -10,24 +10,24 @@ var recipientEmail = 'jfaircloth@cocg.co';
 var adTesting = 1;
 
   // @param {string} Minimum impressions or skip ad group e.g. 'Impressions > 50'
-  var impressionThreshold = 'Impressions > 100';
+  var abImpressionThreshold = 'Impressions > 100';
 
   // @param {string} Testing time period e.g. 'ALL_TIME' or 'LAST_30_DAYS'
-  var timePeriod = 'ALL_TIME';
+  var abTimePeriod = 'ALL_TIME';
 
   // @param {string} Text in name of campaigns to skip e.g. 'Display'
-  var excludedCampaigns = 'display';
+  var abExcludedCampaigns = 'display';
 
   // @param {number} Minimum # of conversions necessary before using conversion 
   // rate as the test. Set to a very high number to always use clicks
-  var conversionThreshold = 2;
+  var abConversionThreshold = 2;
 
   // @param {number} Threshold of caring. Any loss below this number is acceptable.
-  var acceptableLoss = 0.002;
+  var abAcceptableLoss = 0.002;
 
   // @params {string} Label Names
-  var winnerLabel = 'Winner';
-  var loserLabel = 'Loser';
+  var abWinnerLabel = 'Winner';
+  var abLoserLabel = 'Loser';
 
 // Private Variables
 var sendEmail = false;
@@ -42,7 +42,7 @@ function main(){
     // Include the script
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
     eval(code);
-    bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns);
+    bayesAdGroupIterator(abImpressionThreshold, abTimePeriod, abExcludedCampaigns);
   }
   
   // Send an email alert if anything triggered it.

@@ -13,8 +13,8 @@ function bayesAdGroupIterator(impressionThreshold, timePeriod, excludedCampaigns
   deleteLabels('Odds To Win');
   
   // Create the winner and loser labels if they don't already exist
-  checkForLabels(winnerLabel, '#1B9AAA');
-  checkForLabels(loserLabel, '#EF476F');
+  checkForLabels(abWinnerLabel, '#1B9AAA');
+  checkForLabels(abLoserLabel, '#EF476F');
   
   // Include jStat
   var code = getCode('https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js');
@@ -97,8 +97,8 @@ function bayesAdIterator(device, adGroup, impressionThreshold, timePeriod) {
  * @param {object} adsObject - The object containing the ad information
  */
 function bayesAdTester(adsObject){
-  if ( adsObject[0].conversions >= conversionThreshold 
-      && adsObject[1].conversions >= conversionThreshold ) {
+  if ( adsObject[0].conversions >= abConversionThreshold 
+      && adsObject[1].conversions >= abConversionThreshold ) {
     var adGroup = adsObject[0].adGroup;
     var alphaA = adsObject[0].conversions;
     var betaA = adsObject[0].impressions - adsObject[0].conversions;
@@ -132,7 +132,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[1].id]).get().next().applyLabel(loserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
-      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
+      emailBody += 'There is a winner. Even if it is wrong, the expected loss is only ' + formattedDecision + '%.'
       emailBody += '</strong><br></li>';
       sendEmail = true;
       
