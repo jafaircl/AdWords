@@ -8,28 +8,24 @@
 function checkAdExtensions() {
   var calloutIterator = AdWordsApp.extensions()
       .callouts()
-      .withCondition('Status = ENABLED')
       .withCondition(extImpressionThreshold)
       .forDateRange(extDateRange)
       .get();
   
   var phoneNumberIterator = AdWordsApp.extensions()
       .phoneNumbers()
-      .withCondition('Status = ENABLED')
       .withCondition(extImpressionThreshold)
       .forDateRange(extDateRange)
       .get();
   
   var reviewIterator = AdWordsApp.extensions()
       .reviews()
-      .withCondition('Status = ENABLED')
       .withCondition(extImpressionThreshold)
       .forDateRange(extDateRange)
       .get();
   
   var sitelinkIterator = AdWordsApp.extensions()
-      .sitelinks() 
-      .withCondition('Status = ENABLED')
+      .sitelinks()
       .withCondition(extImpressionThreshold)
       .forDateRange(extDateRange)
       .get();
@@ -42,7 +38,6 @@ function checkAdExtensions() {
   while (calloutIterator.hasNext()) {
     var callout = calloutIterator.next().getText();
     emailBody += '<li>' + callout + '</li>';
-    Logger.log(callout);
   }
   
   if (phoneNumberIterator.hasNext()){
@@ -52,7 +47,6 @@ function checkAdExtensions() {
   while (phoneNumberIterator.hasNext()) {
     var phoneNumber = phoneNumberIterator.next().getPhoneNumber();
     emailBody += '<li>' + phoneNumber + '</li>';
-    Logger.log(phoneNumber);
   }
   
   if (reviewIterator.hasNext()){
@@ -62,7 +56,6 @@ function checkAdExtensions() {
   while (reviewIterator.hasNext()) {
     var review = reviewIterator.next().getText();
     emailBody += '<li>' + review + '</li>';
-    Logger.log(review);
   }
   
   if (sitelinkIterator.hasNext()){
@@ -72,6 +65,5 @@ function checkAdExtensions() {
   while (sitelinkIterator.hasNext()) {
     var sitelink = sitelinkIterator.next().getLinkText();
     emailBody += '<li>' + sitelink + '</li>';
-    Logger.log(sitelink);
   }
 }
