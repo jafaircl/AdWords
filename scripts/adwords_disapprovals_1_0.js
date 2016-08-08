@@ -38,12 +38,12 @@ function checkKeywords(){
         emailBody += '<table><tr><th colspan="4"><h3>Keywords Below First Page Bid:</h3></th></tr>';
         emailBody += '<tr><th>Campaign</th><th>Keyword</th><th>Current Bid</th><th>First Page Bid</th></tr>';
       }
-      j++;
       sendEmail = true;
       emailBody += '<tr><td>' + campaignName + '</td><td>' + keywordText + '</td><td>$' + keywordCpc + '</td><td>$' + keywordFirstPageCpc + '</td></tr>';
+      j++;
     }
-    emailBody += '</table>';
   }
+  emailBody += '</table>';
 }
 
 function checkAds() {
