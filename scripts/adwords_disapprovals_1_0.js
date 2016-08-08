@@ -38,8 +38,8 @@ function checkKeywords(){
       j++;
       sendEmail = true;
       emailBody += '<li>' + keywordText + ' in ' + campaignName + ' - Current: $' + keywordCpc + ' - First Page: $' + keywordFirstPageCpc + '</li>';
-      var firstPageBidRow = [campaignName, adGroupName, keywordText, keywordCpc, keywordFirstPageCpc];
-      firstPageBidCsv += '\n' + firstPageBidRow.join(',');
+      //var firstPageBidRow = [campaignName, adGroupName, keywordText, keywordCpc, keywordFirstPageCpc];
+      //firstPageBidCsv += '\n' + firstPageBidRow.join(',');
     }
   }
 }
