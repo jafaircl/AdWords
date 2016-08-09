@@ -143,7 +143,7 @@ function bayesAdTester(adsObject){
       adGroup.ads().withIds([adsObject[0].id]).get().next().applyLabel(abLoserLabel);
       
       emailBody += '<br><li><strong>' + adsObject[0].campaignName + ' - ' + adsObject[0].adGroupName + '<br>';
-      emailBody += 'There is a winner. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
+      emailBody += 'There is a winner with ' + Math.round((1-test) * 100) + '% probability. Even if it is wrong, the expeced loss is only ' + formattedDecision + '%.'
       emailBody += '</strong><br></li>';
       sendEmail = true;
       
