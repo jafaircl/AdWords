@@ -7,12 +7,12 @@ var recipientEmail = 'jfaircloth@cocg.co';
 /*
  * Ad Extension Check
  */
-var adExtensionCheck = 1;
+var adExtensionCheck = 0;
 
 /*
  * Check For And & Keyword Disapprovals
  */
-var checkAdsAndKeywords = 1;
+var checkAdsAndKeywords = 0;
 
 /*
  * A/B Ad Testing
@@ -26,7 +26,7 @@ var adTesting = 1;
   var abTimePeriod = 'ALL_TIME';
 
   // @param {string} Text in name of campaigns to skip e.g. 'Display'
-  var abExcludedCampaigns = 'display';
+  var abExcludedCampaigns = 'search';
 
   // @param {number} Minimum # of conversions necessary before using conversion 
   // rate as the test. Set to a very high number to always use clicks
@@ -38,7 +38,7 @@ var adTesting = 1;
 /*
  * Watson Keyword Miner
  */
-var watsonKeywordMiner = 1;
+var watsonKeywordMiner = 0;
 
 // Private Variables
 var sendEmail = false;

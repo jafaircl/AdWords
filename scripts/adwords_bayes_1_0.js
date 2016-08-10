@@ -203,9 +203,9 @@ function bayesAdTester(adsObject){
 function bayesTest(alphaA, betaA, alphaB, betaB) {
   var test = 0;
   for (i = 0; i < alphaB; i++) {
-    var numerator = jStat.betafn((alphaA + i), (betaA + betaB));
-    var denominator = (betaB + i) * jStat.betafn((1 + i), betaB) * jStat.betafn(alphaA, betaA);
-    test += numerator / denominator;
+    var numerator = jStat.betaln((alphaA + i), (betaA + betaB));
+    var denominator = Math.log(betaB + i) - jStat.betaln((1 + i), betaB) - jStat.betaln(alphaA, betaA);
+    test += Math.exp(numerator - denominator);
   }
   
   return test;
