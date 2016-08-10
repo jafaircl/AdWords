@@ -205,7 +205,7 @@ function bayesTest(alphaA, betaA, alphaB, betaB) {
   for (i = 0; i < alphaB; i++) {
     var numerator = jStat.betaln((alphaA + i), (betaA + betaB));
     var denominator = Math.log(betaB + i) - jStat.betaln((1 + i), betaB) - jStat.betaln(alphaA, betaA);
-    test += Math.exp(numerator - denominator);
+    test += Math.exp(numerator / denominator);
   }
   
   return test;
