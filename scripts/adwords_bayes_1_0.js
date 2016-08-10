@@ -208,7 +208,7 @@ function bayesTest(alphaA, betaA, alphaB, betaB) {
     test += numerator / denominator;*/
     test += Math.exp(jStat.betaln(alphaA+i, betaB+betaA) - Math.log(betaB+i) - jStat.betaln(1+i, betaB) - jStat.betaln(alphaA, betaA));
   }
-  Logger.log(test);
+  
   return test;
 }
 
@@ -223,10 +223,8 @@ function bayesTest(alphaA, betaA, alphaB, betaB) {
 function bayesDecision(alphaA, betaA, alphaB, betaB) {
   var h1 = 1 - bayesTest((alphaA + 1), betaA, alphaB, betaB);
   var h2 = 1 - bayesTest(alphaA, betaA, (alphaB + 1), betaB);
-  //var b1 = jStat.betafn((alphaA + 1), betaA) / jStat.betafn(alphaA, betaA);
-  //var b2 = jStat.betafn((alphaB + 1), betaB) / jStat.betafn(alphaB, betaB);
-  var b1 = Math.exp(jStat.betaln((alphaA + 1), betaA) - jStat.betaln(alphaA, betaA));
-  var b2 = Math.exp(jStat.betaln((alphaB + 1), betaB) - jStat.betaln(alphaB, betaB));
+  var b1 = jStat.betafn((alphaA + 1), betaA) / jStat.betafn(alphaA, betaA);
+  var b2 = jStat.betafn((alphaB + 1), betaB) / jStat.betafn(alphaB, betaB);
   var result = (b1 * h1) - (b2 * h2);
   
   return result;
