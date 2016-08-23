@@ -2,66 +2,43 @@
  * Global Variables
  */
 // Email address to send reports
-var recipientEmail = 'jfaircloth@cocg.co';
-
-/*
- * Ad Extension Check
- */
-var adExtensionCheck = 0;
-
-/*
- * Check For And & Keyword Disapprovals
- */
-var checkAdsAndKeywords = 0;
+var recipientEmail = 'example@example.com';
 
 /*
  * A/B Ad Testing
  */
-var adTesting = 1;
+var adTesting = 1,
 
   // @param {string} Minimum impressions or skip ad group e.g. 'Impressions > 50'
-  var abImpressionThreshold = 'Impressions > 100';
+  abImpressionThreshold = 'Impressions > 100',
 
   // @param {string} Testing time period e.g. 'ALL_TIME' or 'LAST_30_DAYS'
-  var abTimePeriod = 'ALL_TIME';
+  abTimePeriod = 'ALL_TIME',
 
   // @param {string} Text in name of campaigns to skip e.g. 'Display'
-  var abExcludedCampaigns = 'search';
+  abExcludedCampaigns = 'display',
 
   // @param {number} Minimum # of conversions necessary before using conversion 
   // rate as the test. Set to a very high number to always use clicks
-  var abConversionThreshold = 2;
+  abConversionThreshold = 2,
 
   // @param {number} Threshold of caring. Any loss below this number is acceptable.
-  var abAcceptableLoss = 0.002;
+  abAcceptableLoss = 0.002;
 
 /*
  * Watson Keyword Miner
  */
-var watsonKeywordMiner = 0;
+var watsonKeywordMiner = 1;
 
 // Private Variables
-var sendEmail = false;
-var emailBody = '';
-var accountName = AdWordsApp.currentAccount().getName();
+var sendEmail = false,
+    emailBody = '',
+    accountName = AdWordsApp.currentAccount().getName();
 
 /*
  * Main Function
  */
 function main(){
-  
-  if (adExtensionCheck == 1){
-    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_extensions_1_0.js');
-    eval(code);
-    checkAdExtensions();
-  }
-  
-  if (checkAdsAndKeywords == 1){
-    var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_disapprovals_1_0.js');
-    eval(code);
-    checkKeywords();
-    checkAds();
-  }
   
   if (adTesting == 1) {
     var code = getCode('https://raw.githubusercontent.com/jafaircl/AdWords/master/scripts/adwords_bayes_1_0.js');
@@ -79,7 +56,7 @@ function main(){
   if (sendEmail == true) {
     MailApp.sendEmail({
       to: recipientEmail,
-      subject: 'Daily Alerts For ' + accountName,
+      subject: 'Results For ' + accountName,
       htmlBody: emailBody
     });
   }
