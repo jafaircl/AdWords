@@ -5,10 +5,10 @@ var JAMs = JAMs || {
     jStat: 'https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js'
   },
   use: function ( url ) {
-    eval( UrlFetchApp.fetch( url ).getContentText() );
+    return eval( UrlFetchApp.fetch( url ).getContentText() );
   },
   test: function () {
-    JAMs.use( JAMs.dependencies.jStat );
+    eJAMs.use( JAMs.dependencies.jStat );
     var test = jStat.betaln(10, 155);
     Logger.log( test );
   }
