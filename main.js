@@ -6,9 +6,10 @@ var JAMs = JAMs || {
   },
   use: function ( url ) {
     eval( UrlFetchApp.fetch( url ).getContentText() );
+  },
+  test: function () {
+    JAMs.use( JAMs.dependencies.jStat );
+    var test = jStat.betaln(10, 155);
+    Logger.log( test );
   }
 };
-
-JAMs.use( JAMs.dependencies.jStat );
-var test = jStat.betaln(10, 155);
-Logger.log( test );
