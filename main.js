@@ -5,7 +5,7 @@ var JAMs = JAMs || {
     jStat: 'https://cdnjs.cloudflare.com/ajax/libs/jstat/1.5.3/jstat.min.js'
   },
   use: function ( url ) {
-    eval( UrlFetchApp.fetch( url ).getContentText() );
+    return eval( UrlFetchApp.fetch( url ).getContentText() );
   },
   test: function () {
     JAMs.use( JAMs.dependencies.jStat );
