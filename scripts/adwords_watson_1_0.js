@@ -1,7 +1,7 @@
 function watsonKeywords() {
   var adGroupArray = getAdGroupNames();
   var searchQueries = searchQueryRawText();
-  var keywordApiKey = 'a405ac664d683e030f12fafeda7d0bff13dda613';
+  var keywordApiKey = 'YOUR_API_KEY';
   // You can obtain the credentials by following the steps here:
   // http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-language/api/v1/#authentication
   var watson = new AlchemyLanguageAPI({
